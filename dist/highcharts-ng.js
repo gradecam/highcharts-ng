@@ -1,7 +1,10 @@
 (function () {
   'use strict';
   /*global angular: false, Highcharts: false */
-  angular.module('highcharts-ng', []).factory('highchartsNGUtils', highchartsNGUtils).directive('highchart', ['highchartsNGUtils', highchart]);
+  angular.module('highcharts-ng', []).factory('highchartsNGUtils', highchartsNGUtils).directive('highchart', [
+    'highchartsNGUtils',
+    highchart
+  ]);
   function highchartsNGUtils() {
     return {
       indexOf: function (arr, find, i) {
@@ -280,9 +283,6 @@
           }, true);
         });
         scope.$watch('config.options', function (newOptions, oldOptions, scope) {
-          //do nothing when called on registration
-          if (newOptions === oldOptions)
-            return;
           initChart();
           processSeries(scope.config.series);
           chart.redraw();
